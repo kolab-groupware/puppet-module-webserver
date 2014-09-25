@@ -1,0 +1,47 @@
+<?php
+
+# If you customize your file layout, set $IP to the directory that contains
+# the other MediaWiki files. It will be used as a base to locate files.
+if( defined( 'MW_INSTALL_PATH' ) ) {
+        $IP = MW_INSTALL_PATH;
+} else {
+        $IP = '/usr/share/mediawiki';
+}
+
+#$IP = '/usr/share/mediawiki';
+$path = array( $IP, "$IP/includes", "$IP/languages" );
+set_include_path( implode( PATH_SEPARATOR, $path ) . PATH_SEPARATOR . get_include_path() );
+
+$lang = '<%= name %>';
+
+require_once( "/var/www/wiki/CommonSettings.php" );
+
+
+$wgFileCacheDirectory = '/var/cache/mediawiki/<%= name %>/';
+
+$wgScriptPath       = "/w";
+$wgScriptExtension  = ".php";
+$wgScript           = "$wgScriptPath/index.php";
+$wgRedirectScript   = "$wgScriptPath/redirect.php";
+$wgArticlePath      = "/wiki/$1";
+
+$wgUploadPath       = "$wgScriptPath/uploads";
+
+$wgDBprefix         = "<%= name %>_";
+
+$wgLanguageCode = "<%= name %>";
+
+$wgProxyKey = "<%= proxykey %>";
+
+<% if name != "en" %>
+$wgForeignFileRepos[] = array(
+  'class' => 'FSRepo',
+  'name' => 'shared',
+  'url' => "https://en.publictest10.fedoraproject.org/w/uploads",
+  'directory' => '/srv/web/attachments/en',
+  'hashLevels' => 2,
+  'thumbScriptUrl' => !$wgGenerateThumbnailOnParse,
+  'descBaseUrl' => 'https://en.publictest10.fedoraproject.org/wiki/Image:',
+  'fetchDescription' => True,
+);
+<% end %>

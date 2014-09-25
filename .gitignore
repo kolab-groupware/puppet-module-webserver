@@ -1,0 +1,5 @@
+syntax: glob
+*.tar.gz
+documentation/tmp/
+# Ignore Kate (and possibly other editors) backup files
+*~

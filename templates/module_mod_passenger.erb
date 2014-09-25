@@ -1,0 +1,13 @@
+
+<ifModule !mod_passenger.c>
+    LoadModule passenger_module modules/mod_passenger.so
+</ifModule>
+
+PassengerRoot /usr/lib/ruby/gems/1.8/gems/passenger-<%= @gem_passenger_version %>
+PassengerRuby /usr/bin/ruby
+
+<% if @gem_passenger_version =~ /^4\.\d+/ -%>
+PassengerEnabled on
+<% else -%>
+RailsAutoDetect On
+<% end %>

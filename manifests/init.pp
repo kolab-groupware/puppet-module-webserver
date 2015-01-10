@@ -77,7 +77,7 @@ class webserver (
                     "puppet://$server/modules/webserver/httpd24.conf.$hostname",
                     "puppet://$server/modules/webserver/httpd24.conf.$groupname",
                     "puppet://$server/modules/webserver/httpd24.conf"
-                ]
+                ],
             default => [
                 "puppet://$server/private/$environment/webserver/httpd.conf.$hostname",
                 "puppet://$server/private/$environment/webserver/httpd.conf.$groupname",

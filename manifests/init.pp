@@ -20,7 +20,6 @@ class webserver (
             File["/etc/httpd/includes.d/aliases.conf"],
             File["/etc/httpd/includes.d/do-not-bloat-httpd.conf"],
             File["/etc/httpd/includes.d/listen.conf"],
-            File["/etc/httpd/includes.d/virtualhost.conf"],
             File["/etc/httpd/modules-enabled/"],
             File["/etc/httpd/sites-enabled/"],
             Package["httpd"]

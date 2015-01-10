@@ -424,7 +424,7 @@ class webserver (
             Service["httpd"]
         )
 
-    case ${::httpd_version} {
+    case $httpd_version {
         /^2\.4\./: {
             webserver::includedfile { [
                     "admin.conf",

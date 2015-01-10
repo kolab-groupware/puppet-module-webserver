@@ -424,14 +424,25 @@ class webserver (
             Service["httpd"]
         )
 
-    webserver::includedfile { [
-            "admin.conf",
-            "aliases.conf",
-            "do-not-bloat-httpd.conf",
-            "listen.conf",
-            "virtualhost.conf"
-        ]:
-    }
-
+    case ${::httpd_version} {
+        /^2\.4\./: {
+            webserver::includedfile { [
+                    "admin.conf",
+                    "aliases.conf",
+                    "do-not-bloat-httpd.conf",
+                    "listen.conf",
+                    "virtualhost.conf"
+                ]:
+            }
+        }
+        default: {
+            webserver::includedfile { [
+                    "admin.conf",
+                    "aliases.conf",
+                    "do-not-bloat-httpd.conf",
+                    "listen.conf"
+                ]:
+            }
+        }
 }
 

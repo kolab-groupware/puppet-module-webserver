@@ -66,31 +66,27 @@ class webserver (
 
     # The master httpd.conf file
     file { "/etc/httpd/conf/httpd.conf":
-        source => $os ? {
-            "Fedora" => $osmajorver ? {
-                "17" => [
-                    "puppet://$server/private/$environment/webserver/httpd.conf.$hostname",
-                    "puppet://$server/private/$environment/webserver/httpd.conf",
-                    "puppet://$server/files/webserver/httpd.conf.$hostname",
-                    "puppet://$server/files/webserver/httpd.conf",
-                    "puppet://$server/modules/webserver/httpd.conf.$hostname",
-                    "puppet://$server/modules/webserver/httpd.conf"
-                ],
-                default => [
+        source => $::httpd_version ? {
+            /^2\.4\./ => [
                     "puppet://$server/private/$environment/webserver/httpd24.conf.$hostname",
+                    "puppet://$server/private/$environment/webserver/httpd24.conf.$groupname",
                     "puppet://$server/private/$environment/webserver/httpd24.conf",
                     "puppet://$server/files/webserver/httpd24.conf.$hostname",
+                    "puppet://$server/files/webserver/httpd24.conf.$groupname",
                     "puppet://$server/files/webserver/httpd24.conf",
                     "puppet://$server/modules/webserver/httpd24.conf.$hostname",
+                    "puppet://$server/modules/webserver/httpd24.conf.$groupname",
                     "puppet://$server/modules/webserver/httpd24.conf"
                 ]
-            },
             default => [
                 "puppet://$server/private/$environment/webserver/httpd.conf.$hostname",
+                "puppet://$server/private/$environment/webserver/httpd.conf.$groupname",
                 "puppet://$server/private/$environment/webserver/httpd.conf",
                 "puppet://$server/files/webserver/httpd.conf.$hostname",
+                "puppet://$server/files/webserver/httpd.conf.$groupname",
                 "puppet://$server/files/webserver/httpd.conf",
                 "puppet://$server/modules/webserver/httpd.conf.$hostname",
+                "puppet://$server/modules/webserver/httpd.conf.$groupname",
                 "puppet://$server/modules/webserver/httpd.conf"
             ]
         },
